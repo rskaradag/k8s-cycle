@@ -1,0 +1,9 @@
+replicaCount: 2
+image:
+  repository: flask-app
+  tag: local
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+resources: {}
