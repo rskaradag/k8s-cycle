@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: flask-app
+  repository: rsk-app
   tag: local
   pullPolicy: IfNotPresent
 service:
