@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# pipenv / poetry
+Pipfile.lock
+poetry.lock
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+.cache
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Local env files
+.env
+.env.*
+
+# VS Code 
+.vscode/
+
+# Docker / Kubernetes
+*.local
+*.swp
+*.bak
+*.tmp
+.kube/
+.k8s/
+*.tgz
+
+# Helm chart build artifacts
+charts/
+*.tgz
+
+# ArgoCD generated files
+.argocd/
+
+# System files
+Thumbs.db
