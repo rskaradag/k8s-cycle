@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rsk-config
+  namespace: {{ .Release.Namespace }}
+data:
+  DATABASE_URL: postgresql://{{ .Values.postgresql.user }}:{{ .Values.postgresql.password }}@postgres:5432/{{ .Values.postgresql.database }}

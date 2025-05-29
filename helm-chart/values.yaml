@@ -1,9 +1,11 @@
-replicaCount: 2
 image:
-  repository: rsk-app
-  tag: local
+  repository: ghcr.io/rskaradag/rsk-app
+  tag: latest
   pullPolicy: IfNotPresent
-service:
-  type: ClusterIP
-  port: 80
+
+postgresql:
+  user: postgres
+  password: postgres
+  database: tasksdb
+
 resources: {}
