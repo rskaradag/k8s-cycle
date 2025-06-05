@@ -8,4 +8,13 @@ postgresql:
   password: postgres
   database: tasksdb
 
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+  
+ingress:
+  enabled: true
+  host: rsk-app.local
+
 resources: {}
