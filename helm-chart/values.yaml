@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/rskaradag/rsk-app
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 postgresql:
   user: postgres
