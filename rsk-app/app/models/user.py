@@ -13,3 +13,12 @@ class User(db.Model):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     resource_requests = relationship("ResourceRequest", back_populates="user", cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "full_name": self.full_name,
+            "created_at": self.created_at.isoformat() if self.created_at else None
+        }
