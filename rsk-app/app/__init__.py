@@ -6,6 +6,7 @@ from app.db.database import db
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.json.ensure_ascii = False
     db.init_app(app)
 
     from app.api.routes import register_routes
