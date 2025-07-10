@@ -1,0 +1,60 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node modules (dependencies)
+node_modules/
+
+# Build output
+dist/
+*.local
+
+# Vite cache
+.vite/
+.vitepress/cache/
+
+# Environment files
+.env.local
+.env.*.local
+
+# IDE/editor config
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Optional: macOS/Linux swap files
+*.swp
+*.swo
+*.bak
