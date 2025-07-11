@@ -48,3 +48,75 @@ def create_resource():
         'request_id': new_request.resource_request_id,
         'status': 'pending'
     }), 200
+
+@resource_bp.route("/api/resources/<string:resource_request_id>", methods=["GET"])
+def get_resource_by_id(resource_request_id):
+    resource = ResourceRequest.query.filter_by(resource_request_id=resource_request_id).first()
+    if not resource:
+        return jsonify({'error': 'Resource request not found'}), 404
+    return jsonify(resource.to_dict())
+
+@resource_bp.route("/api/resources/<string:resource_request_id>/status", methods=["GET"])
+def get_resource_status(resource_request_id):
+    resource = ResourceRequest.query.filter_by(resource_request_id=resource_request_id).first()
+    if not resource:
+        return jsonify({'error': 'Resource request not found'}), 404
+    return jsonify({'status': resource.status})
+
+@resource_bp.route("/api/resources/<string:resource_request_id>/cancel", methods=["POST"])
+def cancel_resource_request(resource_request_id):
+    resource = ResourceRequest.query.filter_by(resource_request_id=resource_request_id).first()
+    if not resource:
+        return jsonify({'error': 'Resource request not found'}), 404
+
+    if resource.status in ['completed', 'cancelled']:
+        return jsonify({'error': 'Cannot cancel a completed or already cancelled request'}), 400
+
+    resource.status = 'cancelled'
+    db.session.commit()
+
+    return jsonify({'message': 'Resource request cancelled successfully', 'status': resource.status}), 200
+
+@resource_bp.route("/api/resources/<string:resource_request_id>/complete", methods=["POST"])
+def complete_resource_request(resource_request_id):
+    resource = ResourceRequest.query.filter_by(resource_request_id=resource_request_id).first()
+    if not resource:
+        return jsonify({'error': 'Resource request not found'}), 404
+
+    if resource.status != 'pending':
+        return jsonify({'error': 'Cannot complete a request that is not pending'}), 400
+
+    resource.status = 'completed'
+    db.session.commit()
+
+    return jsonify({'message': 'Resource request completed successfully', 'status': resource.status}), 200
+
+@resource_bp.route("/api/resources/<string:resource_request_id>/delete", methods=["DELETE"])
+def delete_resource_request(resource_request_id):
+    resource = ResourceRequest.query.filter_by(resource_request_id=resource_request_id).first()
+    if not resource:
+        return jsonify({'error': 'Resource request not found'}), 404
+
+    db.session.delete(resource)
+    db.session.commit()
+
+    return jsonify({'message': 'Resource request deleted successfully'}), 200
+
+@resource_bp.route("/api/resources/<string:resource_request_id>/update", methods=["PUT"])
+def update_resource_request(resource_request_id):
+    resource = ResourceRequest.query.filter_by(resource_request_id=resource_request_id).first()
+    if not resource:
+        return jsonify({'error': 'Resource request not found'}), 404
+
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+
+    if 'request_name' in data:
+        resource.request_name = data['request_name']
+    if 'resource_url' in data:
+        resource.resource_url = data['resource_url']
+
+    db.session.commit()
+
+    return jsonify({'message': 'Resource request updated successfully', 'resource': resource.to_dict()}), 200
