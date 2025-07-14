@@ -31,3 +31,10 @@ spec:
                 configMapKeyRef:
                   name: rsk-config
                   key: DATABASE_URL
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

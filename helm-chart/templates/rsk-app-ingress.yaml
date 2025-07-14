@@ -15,7 +15,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rsk-app
+                name: rsk-app-svc
                 port:
                   number: 80
 {{- end }}
